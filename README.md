@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/_assets/logo.png" alt="logo" width="300px">
+  <img src="https://raw.githubusercontent.com/AleCandido/opale/main/docs/_assets/logo.png" alt="logo" width="300px">
 </p>
 
 # OpAle

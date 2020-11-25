@@ -5,7 +5,7 @@ from setuptools import setup
 
 # Version info -- read without importing
 _locals = {}
-with open("alabaster/_version.py") as fp:
+with open("opale/_version.py") as fp:
     exec(fp.read(), None, _locals)
 version = _locals["__version__"]
 
@@ -14,16 +14,16 @@ with codecs.open("README.rst", encoding="utf-8") as f:
     readme = f.read()
 
 setup(
-    name="alabaster",
+    name="opale",
     version=version,
-    description="A configurable sidebar-enabled Sphinx theme",
+    description="Dark theme based on Alabaster",
     long_description=readme,
-    author="Jeff Forcier",
-    author_email="jeff@bitprophet.org",
-    url="https://alabaster.readthedocs.io",
-    packages=["alabaster"],
+    author="Alessandro Candido",
+    author_email="candido.ale@gmail.com",
+    url="",
+    packages=["opale"],
     include_package_data=True,
-    entry_points={"sphinx.html_themes": ["alabaster = alabaster"]},
+    entry_points={"sphinx.html_themes": ["opale = opale"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
