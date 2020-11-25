@@ -1,27 +1,33 @@
 #!/usr/bin/env python
 
-import codecs
-from setuptools import setup
+from setuptools import setup, find_packages
+from tasks import version_info, write_version_py
 
-# Version info -- read without importing
-_locals = {}
-with open("opale/_version.py") as fp:
-    exec(fp.read(), None, _locals)
-version = _locals["__version__"]
+# write version on the fly - inspired by numpy
+MAJOR = 0
+MINOR = 0
+MICRO = 0
+
+# Version module
+write_version_py((MAJOR, MINOR, MICRO))
+
 
 # README into long description
-with codecs.open("README.rst", encoding="utf-8") as f:
+with open("README.md") as f:
     readme = f.read()
+    print(readme)
 
 setup(
     name="opale",
-    version=version,
+    version=version_info(MAJOR, MINOR, MICRO),
     description="Dark theme based on Alabaster",
     long_description=readme,
+    long_description_content_type="text/markdown",
     author="Alessandro Candido",
     author_email="candido.ale@gmail.com",
     url="",
-    packages=["opale"],
+    package_dir={"": "src"},
+    packages=find_packages("src"),
     include_package_data=True,
     entry_points={"sphinx.html_themes": ["opale = opale"]},
     classifiers=[
