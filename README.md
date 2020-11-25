@@ -1,4 +1,6 @@
-![logo](docs/_assets/logo.png)
+<p align="center">
+  <img src="docs/_assets/logo.png" alt="logo" width="300px">
+</p>
 
 # OpAle
 
