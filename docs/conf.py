@@ -6,13 +6,13 @@ templates_path = ["_templates"]
 source_suffix = ".rst"
 master_doc = "index"
 
-project = u"Alabaster"
+project = u"Opale"
 year = datetime.now().year
-copyright = u"%d Jeff Forcier" % year
+copyright = u"%d Alessandro Candido " % year
 
 exclude_patterns = ["_build"]
 
-html_theme = "alabaster"
+html_theme = "opale"
 html_sidebars = {
     "**": [
         "about.html",
@@ -23,14 +23,13 @@ html_sidebars = {
     ]
 }
 html_theme_options = {
-    "description": "A light, configurable Sphinx theme",
-    "github_user": "bitprophet",
-    "github_repo": "alabaster",
+    "description": "Dark theme based on Alabaster.",
+    "github_user": "AleCandido",
+    "github_repo": "opale",
     "fixed_sidebar": True,
-    "tidelift_url": "https://tidelift.com/subscription/pkg/pypi-alabaster?utm_source=pypi-alabaster&utm_medium=referral&utm_campaign=docs",  # noqa
 }
 
 extensions.append("releases")
-releases_github_path = "bitprophet/alabaster"
+releases_github_path = "AleCandido/opale"
 # Our pre-0.x releases are unstable / mix bugs+features
 releases_unstable_prehistory = True

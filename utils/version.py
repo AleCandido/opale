@@ -33,6 +33,8 @@ short_version = '%(short_version)s'
 version = '%(version)s'
 full_version = '%(full_version)s'
 is_released = %(is_released)s
+
+__version__ = version
 """
     version = version_info(*version)
     if not version["is_released"]:

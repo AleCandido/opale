@@ -29,6 +29,10 @@ setup(
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,
+    package_data={
+        "": ["LICENSE", "README.md"],
+        "opale": ["src/opale/*.html", "src/opale/theme.conf", "src/opale/static/*"],
+    },
     entry_points={"sphinx.html_themes": ["opale = opale"]},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
