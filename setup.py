@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 from setuptools import setup, find_packages
-from tasks import version_info, write_version_py
+from utils.version import version_info, write_version_py
 
 # write version on the fly - inspired by numpy
 MAJOR = 0
 MINOR = 0
-MICRO = 0
+MICRO = 1
 
 # Version module
 write_version_py((MAJOR, MINOR, MICRO))
@@ -19,7 +19,7 @@ with open("README.md") as f:
 
 setup(
     name="opale",
-    version=version_info(MAJOR, MINOR, MICRO),
+    version=version_info(MAJOR, MINOR, MICRO)["version"],
     description="Dark theme based on Alabaster",
     long_description=readme,
     long_description_content_type="text/markdown",
