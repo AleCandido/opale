@@ -1,5 +1,3 @@
-# flake8: noqa
-
 from pygments.style import Style
 from pygments.token import (
     Keyword,

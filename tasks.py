@@ -16,7 +16,8 @@ def clean(c):
     generated_assets = [
         static / f
         for f in [
-            "componentOne.js",
+            "nightSwitcher.js",
+            "nightSwitcher.js.LICENSE.txt",
             "componentTwo.js",
             "opale_extra.css",
             "opale_extra.js",
