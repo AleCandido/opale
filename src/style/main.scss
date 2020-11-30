@@ -1,0 +1,9 @@
+@mixin ciao {
+  background-color: #000000;
+}
+
+body {
+  @include ciao;
+
+  color: coral;
+}

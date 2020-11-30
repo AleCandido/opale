@@ -41,16 +41,14 @@ module.exports = {
   entry: {
     componentOne: "./src/components/componentOne.js",
     componentTwo: "./src/components/componentTwo.js",
+    opale_extra: "./src/style/main.scss",
   },
 
   output: {
     path: path.resolve(__dirname, "src/opale/static"),
   },
 
-  plugins: [
-    new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: "main.[chunkhash].css" }),
-  ],
+  plugins: [new webpack.ProgressPlugin(), new MiniCssExtractPlugin()],
 
   module: {
     rules: [
@@ -60,9 +58,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-          },
-          {
-            loader: "style-loader",
           },
           {
             loader: "css-loader",
