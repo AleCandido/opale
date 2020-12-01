@@ -9,9 +9,11 @@ module.exports = {
   mode: "development",
 
   entry: {
-    nightSwitcher: "./src/components/nightSwitcher.jsx",
-    //componentTwo: "./src/components/componentTwo.js",
-    opale_extra: "./src/style/main.scss",
+    components: [
+      "./src/components/nightSwitcher.jsx",
+      "./src/components/myButton.jsx",
+    ],
+    style: "./src/style/main.scss",
   },
 
   output: {
@@ -27,6 +29,11 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            presets: [
+              //["es2015", { modules: false }], // IMPORTANT
+            ],
+          },
         },
       },
       {

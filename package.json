@@ -27,6 +27,7 @@
     "react-dom": "^17.0.1"
   },
   "scripts": {
+    "webpack": "webpack --mode=development",
     "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production"
   }

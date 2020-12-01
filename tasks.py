@@ -16,11 +16,10 @@ def clean(c):
     generated_assets = [
         static / f
         for f in [
-            "nightSwitcher.js",
-            "nightSwitcher.js.LICENSE.txt",
-            "componentTwo.js",
-            "opale_extra.css",
-            "opale_extra.js",
+            "components.js",
+            "components.js.LICENSE.txt",
+            "style.css",
+            "style.js",
         ]
     ]
     for f in generated_assets:

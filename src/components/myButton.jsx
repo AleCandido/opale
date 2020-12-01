@@ -9,7 +9,7 @@ class NightSwitcher extends Component {
       night: false,
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick(event) {
@@ -24,6 +24,3 @@ class NightSwitcher extends Component {
     return <button onClick={this.handleClick}></button>;
   }
 }
-
-const domContainer = document.querySelector("#night-switcher");
-ReactDOM.render(React.createElement(NightSwitcher), domContainer);
