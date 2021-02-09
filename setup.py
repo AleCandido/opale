@@ -12,6 +12,11 @@ repo_path = pathlib.Path(__file__).parent
 
 
 def setup_package():
+    # README into long description
+    with open("README.md") as f:
+        readme = f.read()
+        print(readme)
+
     # write version
     pack.versions.write_version_py(
         MAJOR,
@@ -23,7 +28,7 @@ def setup_package():
 
     setup(
         name="opale",
-        version=pack.version_info(MAJOR, MINOR, MICRO)["version"],
+        version=pack.versions.mkversion(MAJOR, MINOR, MICRO),
         description="Dark theme based on Alabaster",
         long_description=readme,
         long_description_content_type="text/markdown",
@@ -61,7 +66,5 @@ def setup_package():
     )
 
 
-# README into long description
-with open("README.md") as f:
-    readme = f.read()
-    print(readme)
+if __name__ == "__main__":
+    setup_package()
