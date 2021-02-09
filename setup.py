@@ -1,57 +1,67 @@
 #!/usr/bin/env python
+import pathlib
 
 from setuptools import setup, find_packages
-from utils.version import version_info, write_version_py
+import packutil as pack
 
 # write version on the fly - inspired by numpy
 MAJOR = 0
 MINOR = 0
 MICRO = 1
+repo_path = pathlib.Path(__file__).parent
 
-# Version module
-write_version_py((MAJOR, MINOR, MICRO))
+
+def setup_package():
+    # write version
+    pack.versions.write_version_py(
+        MAJOR,
+        MINOR,
+        MICRO,
+        pack.versions.is_released(repo_path),
+        filename="src/opale/version.py",
+    )
+
+    setup(
+        name="opale",
+        version=pack.version_info(MAJOR, MINOR, MICRO)["version"],
+        description="Dark theme based on Alabaster",
+        long_description=readme,
+        long_description_content_type="text/markdown",
+        author="Alessandro Candido",
+        author_email="candido.ale@gmail.com",
+        url="",
+        package_dir={"": "src"},
+        packages=find_packages("src"),
+        include_package_data=True,
+        package_data={
+            "": ["LICENSE", "README.md"],
+            "opale": ["src/opale/*.html", "src/opale/theme.conf", "src/opale/static/*"],
+        },
+        entry_points={"sphinx.html_themes": ["opale = opale"]},
+        classifiers=[
+            "Development Status :: 5 - Production/Stable",
+            "Intended Audience :: Developers",
+            "License :: OSI Approved :: BSD License",
+            "Operating System :: OS Independent",
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 2",
+            "Programming Language :: Python :: 2.6",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.2",
+            "Programming Language :: Python :: 3.3",
+            "Programming Language :: Python :: 3.4",
+            "Programming Language :: Python :: 3.5",
+            "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: Implementation :: CPython",
+            "Programming Language :: Python :: Implementation :: PyPy",
+            "Topic :: Documentation",
+            "Topic :: Software Development :: Documentation",
+        ],
+    )
 
 
 # README into long description
 with open("README.md") as f:
     readme = f.read()
     print(readme)
-
-setup(
-    name="opale",
-    version=version_info(MAJOR, MINOR, MICRO)["version"],
-    description="Dark theme based on Alabaster",
-    long_description=readme,
-    long_description_content_type="text/markdown",
-    author="Alessandro Candido",
-    author_email="candido.ale@gmail.com",
-    url="",
-    package_dir={"": "src"},
-    packages=find_packages("src"),
-    include_package_data=True,
-    package_data={
-        "": ["LICENSE", "README.md"],
-        "opale": ["src/opale/*.html", "src/opale/theme.conf", "src/opale/static/*"],
-    },
-    entry_points={"sphinx.html_themes": ["opale = opale"]},
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: BSD License",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.2",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Topic :: Documentation",
-        "Topic :: Software Development :: Documentation",
-    ],
-)
