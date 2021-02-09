@@ -22,7 +22,12 @@ html_sidebars = {
         "donate.html",
     ]
 }
+# html_logo = "_static/logo.png"
+html_static_path = ["_static"]
 html_theme_options = {
+    "logo": "logo.png",
+    "logo_name": True,
+    "logo_text_align": "center",
     "description": "Dark theme based on Alabaster.",
     "github_user": "AleCandido",
     "github_repo": "opale",
