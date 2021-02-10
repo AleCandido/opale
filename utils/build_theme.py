@@ -72,6 +72,9 @@ def make_opale_css_t():
         style_css = re.sub(
             r"^(\s*)(\w.*)\{$", fr"\1body.{name} \2{{", style_css, flags=re.MULTILINE
         )
+        style_css = re.sub(
+            r"^(.*) body (.*)\{$", fr"\1 \2{{", style_css, flags=re.MULTILINE
+        )
         styles_css.append(style_css)
 
     # dump the result

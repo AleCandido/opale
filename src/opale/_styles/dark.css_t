@@ -92,7 +92,7 @@ hr {
 }
 
 div.body {
-    background-color: {{ theme_body_bg  }};
+    /*background-color: {{ theme_body_bg  }};*/
     color: {{ theme_body_text }};
     padding: 0 30px 0 30px;
 }
@@ -619,7 +619,7 @@ a:hover tt, a:hover code {
 
     div.documentwrapper {
         float: none;
-        background: {{ theme_base_bg }};
+        /*background: {{ theme_base_bg }};*/
     }
 
     div.sphinxsidebar {
