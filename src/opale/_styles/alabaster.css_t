@@ -1,3 +1,5 @@
+/* vim: set syntax=css: */
+
 {%- set theme_body_bg = theme_body_bg or theme_base_bg %}
 {%- set theme_code_highlight_bg = theme_code_highlight_bg or theme_body_bg %}
 {%- set theme_sidebar_header = theme_sidebar_header or theme_gray_1 %}
@@ -52,8 +54,6 @@
 
 {%- set theme_relbar_border = theme_relbar_border or theme_gray_2 -%}
 
-
-@import url("basic.css");
 
 /* -- page layout ----------------------------------------------------------- */
 

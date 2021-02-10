@@ -1,17 +1,27 @@
 #!/usr/bin/env python
+import sys
 import pathlib
 
 from setuptools import setup, find_packages
 import packutil as pack
 
+repo_path = pathlib.Path(__file__).parent
+
+# fmt: off
+sys.path.insert(0, str(repo_path.absolute()))
+import utils
+sys.path.pop(0)
+# fmt: on
+
 # write version on the fly - inspired by numpy
 MAJOR = 0
 MINOR = 0
 MICRO = 1
-repo_path = pathlib.Path(__file__).parent
 
 
 def setup_package():
+    utils.build_theme.all()
+
     # README into long description
     with open("README.md") as f:
         readme = f.read()
