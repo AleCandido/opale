@@ -18,13 +18,11 @@ root = pathlib.Path(__file__).absolute().parents[1]
 package = root / "src" / "opale"
 styles = package / "_styles"
 
-# TODO: remove all the write statements
-
 
 def make_theme_conf():
     # load ingredients
-    with open(styles / "theme.conf") as tcf:
-        theme_conf = tcf.read()
+    with open(styles / "opale.conf") as tcf:
+        opale_conf = tcf.read()
 
     with open(styles / "styles.json") as namesf:
         names = json.load(namesf)
@@ -35,12 +33,12 @@ def make_theme_conf():
         with open(styles / f"{name}.conf") as stylef:
             style_conf = stylef.read()
 
-        style_conf = re.sub(" =", f"_{name} =", style_conf)
+        style_conf = re.sub("(.*) =", fr"{name}_\1 =", style_conf)
         styles_conf.append(style_conf)
 
     # dump the result
     with open(package / "theme.conf", "w") as gen_theme:
-        gen_theme.write("\n".join([theme_conf, *styles_conf]))
+        gen_theme.write("\n".join([opale_conf, *styles_conf]))
 
 
 def make_opale_css_t():
@@ -54,11 +52,27 @@ def make_opale_css_t():
     # generate the content
     styles_css = []
     for name in names:
-        with open(styles / f"{name}.conf") as csstf:
-            styles_css = csstf.read()
+        with open(styles / f"{name}.css_t") as csstf:
+            style_css = csstf.read()
 
-        # styles_css = re.sub(" =", f"_{name} =", style_css)
-        # styles_css.append(style_css)
+        lines = []
+        for line in style_css.splitlines():
+            # __import__("pdb").set_trace()
+            if "vim:" in line:
+                # skip modelines
+                continue
+            elif line[:2] != "{%":
+                lines.append(line)
+            else:
+                lines.append(re.sub("theme_", f"theme_{name}_", line))
+        style_css = "\n".join(lines)
+
+        style_css = re.sub(r"\{\{ theme_", fr"{{{{ theme_{name}_", style_css)
+        style_css = re.sub("themeglobal", "theme", style_css)
+        style_css = re.sub(
+            r"^(\s*)(\w.*)\{$", fr"\1body.{name} \2{{", style_css, flags=re.MULTILINE
+        )
+        styles_css.append(style_css)
 
     # dump the result
     with open(package / "static" / "opale.css_t", "w") as gen_css_t:
@@ -66,13 +80,5 @@ def make_opale_css_t():
 
 
 def all():
-    import datetime
-
-    with open("ciao.md", "a") as f:
-        f.write(f"\t{datetime.datetime.now()}\n")
-
     make_theme_conf()
     make_opale_css_t()
-
-    with open("ciao.md", "a") as f:
-        f.write(f"{datetime.datetime.now()}\n\n")
