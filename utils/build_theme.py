@@ -10,22 +10,27 @@ They are compiled to just two files:
 
 """
 
+from os import fdopen
 import pathlib
 import json
 import re
+import sys
+import importlib
+
+import pygments.formatters
 
 root = pathlib.Path(__file__).absolute().parents[1]
 package = root / "src" / "opale"
 styles = package / "_styles"
+
+with open(styles / "styles.json") as namesf:
+    names = json.load(namesf)
 
 
 def make_theme_conf():
     # load ingredients
     with open(styles / "opale.conf") as tcf:
         opale_conf = tcf.read()
-
-    with open(styles / "styles.json") as namesf:
-        names = json.load(namesf)
 
     # generate the content
     styles_conf = []
@@ -45,9 +50,6 @@ def make_opale_css_t():
     # load ingredients
     with open(styles / "opale.css_t") as octf:
         opale_css_t = octf.read()
-
-    with open(styles / "styles.json") as namesf:
-        names = json.load(namesf)
 
     # generate the content
     styles_css = []
@@ -82,6 +84,40 @@ def make_opale_css_t():
         gen_css_t.write("\n".join([opale_css_t, *styles_css]))
 
 
+def make_opale_pygments_css():
+    # load ingredients
+    sys.path.insert(0, str(styles))
+
+    pygments_styles = []
+    for name in names:
+        pystyle = importlib.import_module(f"{name}_pygments")
+        mystyle = pystyle.__getattribute__(name.capitalize())
+        pygments_style = pygments.formatters.HtmlFormatter(
+            style=mystyle
+        ).get_style_defs(".highlight")
+        # TODO: for some reason pip selects pygments 2.3.1, thus prepend the
+        # missing part manually, injecting by hand some colors taken from the
+        # pygments style
+        pygments_style = (
+            f"""pre {{ line-height: 125%; background-color: {mystyle.background_color} }}
+td.linenos pre {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
+span.linenos {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
+td.linenos pre.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}
+span.linenos.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}\n"""
+            + pygments_style
+        )
+        pygments_styles.append(
+            re.sub(r"^", f"body.{name} ", pygments_style, flags=re.MULTILINE)
+        )
+
+    sys.path.pop(0)
+
+    # dump the result
+    with open(package / "static" / "opale_pygments.css", "w") as gen_pygments_css:
+        gen_pygments_css.write("\n".join(pygments_styles))
+
+
 def all():
     make_theme_conf()
     make_opale_css_t()
+    make_opale_pygments_css()

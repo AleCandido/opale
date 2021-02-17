@@ -1,3 +1,3 @@
 [build-system]
-requires = ["setuptools >= 40.9.0", "wheel", "packutil"]
+requires = ["setuptools >= 40.9.0", "wheel", "packutil", "pygments>2.7"]
 build-backend = "setuptools.build_meta"
