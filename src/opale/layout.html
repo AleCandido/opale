@@ -74,7 +74,31 @@ block relbar2 %}{% endblock %} {# Nav should appear before content, not after #}
   >
   {%- endif %}
 </div>
-<script src="_static/switch_style.js" charset="utf-8"></script>
+<template id="theme-selector">
+  <mode-selector
+    name="{{ project }}-opale"
+    n="2"
+    choices='{"dark": "#16181D", "alabaster": "#FFFFFF"}'
+    default="dark"
+    callback="setTheme"
+    circ-width="20px"
+    border-size="1px"
+    style="margin-bottom: 5px"
+  ></mode-selector>
+</template>
+<script charset="utf-8">
+  let themeSelector = document
+    .getElementById("theme-selector")
+    .content.cloneNode(true);
+  document
+    .getElementsByClassName("sphinxsidebarwrapper")[0]
+    .getElementsByTagName("h3")[0]
+    .before(themeSelector);
+  function setTheme(id) {
+    document.body.className = id;
+  }
+</script>
+<script src="_static/mode-selector.js" charset="utf-8"></script>
 
 {% if theme_github_banner|lower != 'false' %}
 <a
