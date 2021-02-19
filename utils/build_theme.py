@@ -84,7 +84,7 @@ def make_opale_css_t():
         gen_css_t.write("\n".join([opale_css_t, *styles_css]))
 
 
-def make_opale_pygments_css():
+def make_opale_pygments_css_t():
     # load ingredients
     sys.path.insert(0, str(styles))
 
@@ -95,11 +95,14 @@ def make_opale_pygments_css():
         pygments_style = pygments.formatters.HtmlFormatter(
             style=mystyle
         ).get_style_defs(".highlight")
+        if not hasattr(mystyle, "border_color"):
+            mystyle.border_color = mystyle.background_color
+
         # TODO: for some reason pip selects pygments 2.3.1, thus prepend the
         # missing part manually, injecting by hand some colors taken from the
         # pygments style
         pygments_style = (
-            f"""pre {{ line-height: 125%; background-color: {mystyle.background_color} }}
+            f"""pre {{ line-height: 125%; background-color: {mystyle.background_color}; border: 1px solid {mystyle.border_color} }}
 td.linenos pre {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
 span.linenos {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
 td.linenos pre.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}
@@ -113,11 +116,11 @@ span.linenos.special {{ color: #000000; background-color: #ffffc0; padding-left:
     sys.path.pop(0)
 
     # dump the result
-    with open(package / "static" / "opale_pygments.css", "w") as gen_pygments_css:
+    with open(package / "static" / "opale_pygments.css_t", "w") as gen_pygments_css:
         gen_pygments_css.write("\n".join(pygments_styles))
 
 
 def all():
     make_theme_conf()
     make_opale_css_t()
-    make_opale_pygments_css()
+    make_opale_pygments_css_t()
