@@ -19,23 +19,23 @@
 {%- set theme_seealso_bg = theme_seealso_bg or theme_gray_2 %}
 
 {#- - critical level #}
-{%- set theme_danger_bg = theme_danger_bg or theme_pink_1 %}
-{%- set theme_danger_border = theme_danger_border or theme_pink_2 %}
-{%- set theme_danger_shadow = theme_danger_shadow or theme_pink_3 %}
+{%- set theme_danger_bg = theme_danger_bg or theme_red_1 %}
+{%- set theme_danger_border = theme_danger_border or theme_red_2 %}
+{%- set theme_danger_shadow = theme_danger_shadow or theme_red_3 %}
 
-{%- set theme_error_bg = theme_error_bg or theme_pink_1 %}
-{%- set theme_error_border = theme_error_border or theme_pink_2 %}
-{%- set theme_error_shadow = theme_error_shadow or theme_pink_3 %}
+{%- set theme_error_bg = theme_error_bg or theme_red_1 %}
+{%- set theme_error_border = theme_error_border or theme_red_2 %}
+{%- set theme_error_shadow = theme_error_shadow or theme_red_3 %}
 
 {#- - warning level #}
-{%- set theme_caution_bg = theme_caution_bg or theme_pink_1 %}
-{%- set theme_caution_border = theme_caution_border or theme_pink_2 %}
+{%- set theme_caution_bg = theme_caution_bg or theme_red_1 %}
+{%- set theme_caution_border = theme_caution_border or theme_red_2 %}
 
-{%- set theme_attention_bg = theme_attention_bg or theme_pink_1 %}
-{%- set theme_attention_border = theme_attention_border or theme_pink_2 %}
+{%- set theme_attention_bg = theme_attention_bg or theme_red_1 %}
+{%- set theme_attention_border = theme_attention_border or theme_red_2 %}
 
-{%- set theme_warn_bg = theme_warn_bg or theme_pink_1 %}
-{%- set theme_warn_border = theme_warn_border or theme_pink_2 %}
+{%- set theme_warn_bg = theme_warn_bg or theme_red_1 %}
+{%- set theme_warn_border = theme_warn_border or theme_red_2 %}
 
 {#- - normal level #}
 {%- set theme_important_bg = theme_important_bg or theme_gray_2 %}
@@ -284,6 +284,7 @@ div.admonition {
     margin: 20px 0px;
     padding: 10px 30px;
     background-color: {{ theme_admonition_bg }};
+    color: {{ theme_admonition_fg }};
     border: 1px solid {{ theme_admonition_border }};
 }
 

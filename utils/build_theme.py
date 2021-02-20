@@ -71,6 +71,7 @@ def make_opale_css_t():
 
         style_css = re.sub(r"\{\{ theme_", fr"{{{{ theme_{name}_", style_css)
         style_css = re.sub("themeglobal", "theme", style_css)
+        style_css = re.sub(r",(.*)\{", fr",body.{name}\1{{", style_css)
         style_css = re.sub(
             r"^(\s*)(\w.*)\{$", fr"\1body.{name} \2{{", style_css, flags=re.MULTILINE
         )
@@ -82,6 +83,13 @@ def make_opale_css_t():
     # dump the result
     with open(package / "static" / "opale.css_t", "w") as gen_css_t:
         gen_css_t.write("\n".join([opale_css_t, *styles_css]))
+
+
+pygments_box = """pre {{ line-height: 125%; background-color: {bkg}; border: 1px solid {border} }}
+td.linenos pre {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
+span.linenos {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
+td.linenos pre.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}
+span.linenos.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}\n"""
 
 
 def make_opale_pygments_css_t():
@@ -102,11 +110,9 @@ def make_opale_pygments_css_t():
         # missing part manually, injecting by hand some colors taken from the
         # pygments style
         pygments_style = (
-            f"""pre {{ line-height: 125%; background-color: {mystyle.background_color}; border: 1px solid {mystyle.border_color} }}
-td.linenos pre {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
-span.linenos {{ color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }}
-td.linenos pre.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}
-span.linenos.special {{ color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }}\n"""
+            pygments_box.format(
+                bkg=mystyle.background_color, border=mystyle.border_color
+            )
             + pygments_style
         )
         pygments_styles.append(
