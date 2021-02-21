@@ -1,3 +1,5 @@
+/* vim: set syntax=css: */
+
 {%- set theme_body_bg = theme_body_bg or theme_base_bg %}
 {%- set theme_code_highlight_bg = theme_code_highlight_bg or theme_body_bg %}
 {%- set theme_sidebar_header = theme_sidebar_header or theme_gray_1 %}
@@ -17,23 +19,23 @@
 {%- set theme_seealso_bg = theme_seealso_bg or theme_gray_2 %}
 
 {#- - critical level #}
-{%- set theme_danger_bg = theme_danger_bg or theme_pink_1 %}
-{%- set theme_danger_border = theme_danger_border or theme_pink_2 %}
-{%- set theme_danger_shadow = theme_danger_shadow or theme_pink_3 %}
+{%- set theme_danger_bg = theme_danger_bg or theme_red_1 %}
+{%- set theme_danger_border = theme_danger_border or theme_red_2 %}
+{%- set theme_danger_shadow = theme_danger_shadow or theme_red_3 %}
 
-{%- set theme_error_bg = theme_error_bg or theme_pink_1 %}
-{%- set theme_error_border = theme_error_border or theme_pink_2 %}
-{%- set theme_error_shadow = theme_error_shadow or theme_pink_3 %}
+{%- set theme_error_bg = theme_error_bg or theme_red_1 %}
+{%- set theme_error_border = theme_error_border or theme_red_2 %}
+{%- set theme_error_shadow = theme_error_shadow or theme_red_3 %}
 
 {#- - warning level #}
-{%- set theme_caution_bg = theme_caution_bg or theme_pink_1 %}
-{%- set theme_caution_border = theme_caution_border or theme_pink_2 %}
+{%- set theme_caution_bg = theme_caution_bg or theme_red_1 %}
+{%- set theme_caution_border = theme_caution_border or theme_red_2 %}
 
-{%- set theme_attention_bg = theme_attention_bg or theme_pink_1 %}
-{%- set theme_attention_border = theme_attention_border or theme_pink_2 %}
+{%- set theme_attention_bg = theme_attention_bg or theme_red_1 %}
+{%- set theme_attention_border = theme_attention_border or theme_red_2 %}
 
-{%- set theme_warn_bg = theme_warn_bg or theme_pink_1 %}
-{%- set theme_warn_border = theme_warn_border or theme_pink_2 %}
+{%- set theme_warn_bg = theme_warn_bg or theme_red_1 %}
+{%- set theme_warn_border = theme_warn_border or theme_red_2 %}
 
 {#- - normal level #}
 {%- set theme_important_bg = theme_important_bg or theme_gray_2 %}
@@ -53,8 +55,6 @@
 {%- set theme_relbar_border = theme_relbar_border or theme_gray_2 -%}
 
 
-@import url("basic.css");
-
 /* -- page layout ----------------------------------------------------------- */
 
 body {
@@ -68,7 +68,7 @@ body {
 
 
 div.document {
-    width: {{ theme_page_width }};
+    width: {{ themeglobal_page_width }};
     margin: 30px auto 0 auto;
 }
 
@@ -78,11 +78,11 @@ div.documentwrapper {
 }
 
 div.bodywrapper {
-    margin: 0 0 0 {{ theme_sidebar_width }};
+    margin: 0 0 0 {{ themeglobal_sidebar_width }};
 }
 
 div.sphinxsidebar {
-    width: {{ theme_sidebar_width }};
+    width: {{ themeglobal_sidebar_width }};
     font-size: 14px;
     line-height: 1.5;
 }
@@ -92,7 +92,7 @@ hr {
 }
 
 div.body {
-    background-color: {{ theme_body_bg  }};
+    /*background-color: {{ theme_body_bg  }};*/
     color: {{ theme_body_text }};
     padding: 0 30px 0 30px;
 }
@@ -102,7 +102,7 @@ div.body > .section {
 }
 
 div.footer {
-    width: {{ theme_page_width }};
+    width: {{ themeglobal_page_width }};
     margin: 20px auto 30px auto;
     font-size: 14px;
     color: {{ theme_footer_text }};
@@ -284,6 +284,7 @@ div.admonition {
     margin: 20px 0px;
     padding: 10px 30px;
     background-color: {{ theme_admonition_bg }};
+    color: {{ theme_admonition_fg }};
     border: 1px solid {{ theme_admonition_border }};
 }
 
@@ -619,14 +620,14 @@ a:hover tt, a:hover code {
 
     div.documentwrapper {
         float: none;
-        background: {{ theme_base_bg }};
+        /*background: {{ theme_base_bg }};*/
     }
 
     div.sphinxsidebar {
         display: block;
         float: none;
         width: 102.5%;
-        {%- if theme_fixed_sidebar|lower == 'true' %}
+        {%- if themeglobal_fixed_sidebar|lower == 'true' %}
         margin: -20px -30px 20px -30px;
         {%- else %}
         margin: 50px -30px -20px -30px;
@@ -688,7 +689,7 @@ a:hover tt, a:hover code {
     }
 }
 
-{%- if theme_fixed_sidebar|lower == 'true' %}
+{%- if themeglobal_fixed_sidebar|lower == 'true' %}
 @media screen and (min-width: 876px) {
     div.sphinxsidebar {
         position: fixed;

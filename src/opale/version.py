@@ -3,7 +3,7 @@
 major = 0
 short_version = '0.0'
 version = '0.0.1'
-full_version = '0.0.1'
-is_released = True
+full_version = '0.0.1-develop'
+is_released = False
 
 __version__ = version
