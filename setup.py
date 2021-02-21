@@ -44,7 +44,7 @@ def setup_package():
         long_description_content_type="text/markdown",
         author="Alessandro Candido",
         author_email="candido.ale@gmail.com",
-        url="",
+        url="https://github.com/AleCandido/opale",
         package_dir={"": "src"},
         packages=find_packages("src"),
         include_package_data=True,
