@@ -15,8 +15,8 @@ sys.path.pop(0)
 
 # write version on the fly - inspired by numpy
 MAJOR = 0
-MINOR = 0
-MICRO = 1
+MINOR = 1
+MICRO = 0
 
 
 def setup_package():
